@@ -2,7 +2,7 @@
 #ifndef LAB2_4_SERVICE_H
 #define LAB2_4_SERVICE_H
 
-#define MAX_LEN_CHAR 30
+#define MAX_LEN_CHAR 20
 #include "string.h"
 #include <ctype.h>
 
@@ -15,13 +15,18 @@ typedef struct {
 
 typedef struct {
 
-    Materie materii[100];
-    int length;
+    Materie* materii;
+    int length,capacity;
+
 
 }List;
 
 List create();
-List destroy(List* lista);
+
+/*
+ * Dealoca memoria atribuita unei liste
+ */
+int destroy(List* lista);
 
 /*
      * Creaza o materie be baza campurilor
@@ -66,7 +71,7 @@ void add(List* list, Materie materie);
      * @param m: materia care se vrea a fi actualizata
      * @param lista: lista in care se adauga
      */
-void update(List* list, int index, Materie materie);
+int update(List* list, int index, Materie materie);
 
 
 

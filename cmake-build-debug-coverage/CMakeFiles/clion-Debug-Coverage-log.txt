@@ -1,11 +1,20 @@
-/snap/clion/265/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/265/bin/ninja/linux/x64/ninja -DCMAKE_CXX_FLAGS=--coverage -DCMAKE_C_FLAGS=--coverage -G Ninja -S /home/paul/CLionProjects/Lab2v2 -B /home/paul/CLionProjects/Lab2v2/cmake-build-debug-coverage
--- The C compiler identification is GNU 11.4.0
+"C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=--coverage -DCMAKE_C_FLAGS=--coverage -G "CodeBlocks - MinGW Makefiles" -S C:\Users\Paul\CLionProjects\oop -B C:\Users\Paul\CLionProjects\oop\cmake-build-debug-coverage
+CMake Deprecation Warning:
+  Support for "Extra Generators" like
+
+    CodeBlocks
+
+  is deprecated and will be removed from a future version of CMake.  IDEs may
+  use the cmake-file-api(7) to view CMake-generated project build trees.
+
+
+-- The C compiler identification is GNU 13.1.0
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
--- Check for working C compiler: /usr/bin/cc - skipped
+-- Check for working C compiler: C:/Program Files/JetBrains/CLion 2023.2.2/bin/mingw/bin/gcc.exe - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
--- Configuring done (0.3s)
+-- Configuring done (4.6s)
 -- Generating done (0.0s)
 CMake Warning:
   Manually-specified variables were not used by the project:
@@ -13,4 +22,4 @@ CMake Warning:
     CMAKE_CXX_FLAGS
 
 
--- Build files have been written to: /home/paul/CLionProjects/Lab2v2/cmake-build-debug-coverage
+-- Build files have been written to: C:/Users/Paul/CLionProjects/oop/cmake-build-debug-coverage

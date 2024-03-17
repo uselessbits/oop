@@ -1,9 +1,35 @@
+#include <stdio.h>
 #include "service.h"
+#include "stdlib.h"
 
 List create(){
+
     List rez;
     rez.length = 0;
+    rez.capacity = 10;
+    rez.materii = malloc(rez.capacity * sizeof(Materie));
     return rez;
+
+}
+
+int destroy(List *list){
+    //for(int i=0;list->length;i++)
+    list->length=0;
+    list->materii=NULL;
+    return 1;
+}
+
+List resize(List list){
+
+    List newList;
+    newList.capacity=2*list.capacity;
+    newList.length=list.length;
+    newList.materii = malloc(newList.capacity * sizeof(Materie));
+    for(int i=0;i<list.length;i++) {
+        newList.materii[i] = list.materii[i];
+    }
+    free(list.materii);
+    return newList;
 
 }
 
@@ -39,6 +65,7 @@ int findMaterie(List lista, Materie m)
      */
     for(int i=0; i< getLength(lista);i++)
     {
+
         if(strcmp(lista.materii[i].name, m.name) == 0)
             return i;
     }
@@ -60,11 +87,17 @@ void add(List* list, Materie materie)
      * @param m: materia care se vrea a fi adaugata
      * @param lista: lista in care se adauga
      */
-    if(list->length < 100)
+    if(list->length < list->capacity)
+        *list = resize(*list);
+
+    if(list->length < list->capacity)
     {
+
         int i = findMaterie(*list, materie);
+
         if(i!=-1)
         {
+
             list->materii[i]=materie;
         } else
         {
@@ -75,7 +108,7 @@ void add(List* list, Materie materie)
 
 }
 
-void update(List* list, int index, Materie materie){
+int update(List* list, int index, Materie materie){
     /*
      * Actualizeaza o materie din lista
      * @param index: pozitia dmateriei
@@ -83,12 +116,12 @@ void update(List* list, int index, Materie materie){
      * @param lista: lista in care se adauga
      */
     if(index >= getLength(*list))
-        return;
+        return 0;
 
     strcpy(list->materii[index].name, materie.name);
     strcpy(list->materii[index].producer, materie.producer);
     list->materii[index].cantitate=materie.cantitate;
-
+    return 1;
 }
 
 void delete(List* list, int index){
@@ -118,6 +151,7 @@ int cmp(Materie m1, Materie m2, char o)
         return m1.cantitate<m2.cantitate;
     if(o=='d')
         return m1.cantitate>m2.cantitate;
+    return 2;
 }
 List sorteaza(List list, char o, char criteriu){
     /*
@@ -158,10 +192,11 @@ List filter(List list, char b, int minQuantity)
      *
      */
     List newList;
+    newList = create();
     for (int i = 0; i < getLength(list); i++)
         if (list.materii[i].cantitate >= minQuantity)
-            if(tolower((int) list.materii[i].name[0]) == tolower(b))
-
+            if(tolower(list.materii[i].name[0]) == tolower(b))
+                //printf("Addded %s", list.materii[i].name);
                 add(&newList, list.materii[i]);
 
     return newList;
