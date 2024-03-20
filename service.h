@@ -8,25 +8,30 @@
 
 typedef struct {
     int cantitate;
-    char name[MAX_LEN_CHAR];
-    char producer[MAX_LEN_CHAR];
+    char *name;
+    char *producer;
+
 }Materie;
+
 
 
 typedef struct {
 
     Materie* materii;
-    int length,capacity;
+    long length,capacity;
 
 
 }List;
+
+
+void destroyMaterie(Materie* m);
 
 List create();
 
 /*
  * Dealoca memoria atribuita unei liste
  */
-int destroy(List* lista);
+void destroy(List* lista);
 
 /*
      * Creaza o materie be baza campurilor
@@ -46,7 +51,7 @@ int findMaterie(List lista, Materie m);
  * Returneaza lungimea listei
  * Lista-oarecare
  */
-int getLength(List list);
+long getLength(List list);
 
 
 /*
@@ -87,8 +92,7 @@ void delete(List* list, int index);
  *@param: list: o lista oarecare
  *
  */
-List sorteaza(List list, char o, char criteriu);
-
+List sorteaza(List list,int (*f)(Materie m1, Materie m2));
 /*
  * Filteaza lista dupa o litera de inceput si o cantitate minima
  * @list : lista de materii prime
@@ -104,5 +108,7 @@ List filter(List list, char b, int minQuantity);
  */
 int validate(Materie materie);
 
+int cantitateMaiMica(Materie m1, Materie m2);
+int cantitateMaiMare(Materie m1, Materie m2);
 
 #endif //LAB2_4_SERVICE_H

@@ -53,7 +53,7 @@ CMAKE_C_COMPILER_AR:FILEPATH=C:/Program Files/JetBrains/CLion 2023.2.2/bin/mingw
 CMAKE_C_COMPILER_RANLIB:FILEPATH=C:/Program Files/JetBrains/CLion 2023.2.2/bin/mingw/bin/gcc-ranlib.exe
 
 //Flags used by the C compiler during all build types.
-CMAKE_C_FLAGS:STRING=--coverage
+CMAKE_C_FLAGS:STRING=-fprofile-arcs -ftest-coverage
 
 //Flags used by the C compiler during DEBUG builds.
 CMAKE_C_FLAGS_DEBUG:STRING=-g

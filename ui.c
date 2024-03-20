@@ -1,5 +1,7 @@
+
 //problema6
 #include <stdio.h>
+#include <stdlib.h>
 
 
 #include "service.h"
@@ -45,7 +47,10 @@ void addMaterie(List* lista)
     printf("Introdu numele producatorului:");
     scanf("%s", prod);
     printf("Introdu cantitatea:");
-    scanf("%d", &cantitate);
+
+    char cantitate_str[MAX_LEN_CHAR];
+    fgets(cantitate_str, sizeof(cantitate_str), stdin);
+    cantitate = (int)strtol(cantitate_str, NULL, 10);
     Materie materie = createMaterie(nume, prod, cantitate);
     if(validate(materie))
     add(lista, materie);
@@ -63,8 +68,10 @@ void updateMaterie(List* lista)
      */
     printMaterii(*lista);
     int input;
+    char input_str[MAX_LEN_CHAR];
     printf("Intodu indexul materieri care trebuie actualizata: ");
-    scanf(" %d", &input);
+    fgets(input_str, sizeof(input_str), stdin);
+    input = (int)strtol(input_str, NULL, 10);
 
     char nume[MAX_LEN_CHAR], prod[MAX_LEN_CHAR];
     int cantitate;
@@ -74,8 +81,8 @@ void updateMaterie(List* lista)
     printf("Introdu noul producator:");
     scanf("%s", prod);
     printf("Introdu noua cantitate:");
-    scanf("%d", &cantitate);
-
+    fgets(input_str, sizeof(input_str), stdin);
+    cantitate = (int)strtol(input_str, NULL, 10);
     Materie materie = createMaterie(nume, prod, cantitate);
     update(lista, input, materie);
 
@@ -90,8 +97,10 @@ void deleteMaterie(List* lista){
 
     printMaterii(*lista);
     int input;
+    char input_str[MAX_LEN_CHAR];
     printf("Intodu indexul materieri care trebuie stearsa: ");
-    scanf(" %d", &input);
+    fgets(input_str, sizeof(input_str), stdin);
+    input = (int)strtol(input_str, NULL, 10);
     delete(lista, input);
 }
 
@@ -100,13 +109,8 @@ void sorteazaMaterii(List* lista) {
      * Afiseaza lista sortata dupa cantitati
      * @param - lista- pointer
      */
-    char input;
-    printf("Intordu c pentru crescator/ d pentru descrescator");
-    scanf(" %c", &input);
-    char criteriu;
     printf("Intordu n pentru sortare dupa nume | c pentru cantitate");
-    scanf(" %c", &criteriu);
-    List sortat = sorteaza(*lista, input,criteriu);
+    List sortat = sorteaza(*lista, cantitateMaiMica);
     printMaterii(sortat);
 }
 
@@ -119,9 +123,13 @@ void filteazaMaterii(List *lista){
     int minQuant;
     List filtered;
     printf("Introdu o cantitate minima: ");
-    scanf(" %d", &minQuant);
+
+    char cantitate_str[MAX_LEN_CHAR];
+    fgets(cantitate_str, sizeof(cantitate_str), stdin);
+    minQuant = (int) strtol(cantitate_str, NULL, 10);
+
     printf("Introdu o litera: ");
-    scanf(" %c", &first);
+    scanf("%c", &first);
 
     filtered = filter(*lista, first, minQuant);
     printMaterii(filtered);
@@ -164,7 +172,7 @@ void runApp() {
 int main() {
 
     runTests();
-    runApp();
+    //runApp();
 
 
 }
